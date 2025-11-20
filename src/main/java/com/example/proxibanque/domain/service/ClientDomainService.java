@@ -35,7 +35,10 @@ public class ClientDomainService implements ClientManagementUseCase {
         Client client = clientRepository.findById(clientId)
                 .orElseThrow(() -> new BusinessException("Client not found"));
 
+        // Deactivate all cards before deletion
         client.deactivateAllCards();
+
+        // Delete client - this will cascade delete all associated accounts (current & savings) and cards
         clientRepository.deleteById(clientId);
     }
 

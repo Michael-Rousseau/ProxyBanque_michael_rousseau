@@ -1,6 +1,7 @@
 com/example/proxibanque/domain/model/SavingsAccount.class
 com/example/proxibanque/domain/model/Client$ClientBuilder.class
 com/example/proxibanque/domain/model/Account.class
+com/example/proxibanque/application/ClientUpdateRequest.class
 com/example/proxibanque/infrastructure/entity/ClientEntity.class
 com/example/proxibanque/domain/port/ClientRepositoryPort.class
 com/example/proxibanque/application/DtoMapperImpl.class

@@ -6,8 +6,10 @@ import com.example.proxibanque.infrastructure.repository.JpaAdvisorRepository;
 import com.example.proxibanque.infrastructure.repository.JpaClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -39,5 +41,12 @@ public class ClientPersistenceAdapter implements ClientRepositoryPort {
     @Override
     public void deleteById(UUID id) {
         jpaClientRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Client> findAll() {
+        return jpaClientRepository.findAll().stream()
+                .map(mapper::toDomain)
+                .collect(Collectors.toList());
     }
 }

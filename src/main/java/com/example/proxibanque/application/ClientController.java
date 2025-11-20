@@ -27,6 +27,58 @@ public class ClientController {
         return ResponseEntity.ok(mapper.toResponse(createdClient));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ClientResponse> getClient(@PathVariable UUID id) {
+        Client client = clientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Client not found"));
+
+        return ResponseEntity.ok(mapper.toResponse(client));
+    }
+
+    @GetMapping
+    public ResponseEntity<java.util.List<ClientResponse>> getAllClients() {
+        java.util.List<Client> clients = clientRepository.findAll();
+        java.util.List<ClientResponse> responses = clients.stream()
+                .map(mapper::toResponse)
+                .collect(java.util.stream.Collectors.toList());
+
+        return ResponseEntity.ok(responses);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<ClientResponse> updateClient(
+            @PathVariable UUID id,
+            @RequestBody ClientUpdateRequest request) {
+
+        Client client = clientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Client not found"));
+
+        if (request.getFirstName() != null) {
+            client.setFirstName(request.getFirstName());
+        }
+        if (request.getLastName() != null) {
+            client.setLastName(request.getLastName());
+        }
+        if (request.getAddress() != null) {
+            client.setAddress(request.getAddress());
+        }
+        if (request.getZipCode() != null) {
+            client.setZipCode(request.getZipCode());
+        }
+        if (request.getCity() != null) {
+            client.setCity(request.getCity());
+        }
+        if (request.getPhone() != null) {
+            client.setPhone(request.getPhone());
+        }
+        if (request.getEmail() != null) {
+            client.setEmail(request.getEmail());
+        }
+
+        Client updatedClient = clientRepository.save(client);
+        return ResponseEntity.ok(mapper.toResponse(updatedClient));
+    }
+
     @PostMapping("/{clientId}/cards")
     public ResponseEntity<CardResponse> assignCard(
             @PathVariable UUID clientId,

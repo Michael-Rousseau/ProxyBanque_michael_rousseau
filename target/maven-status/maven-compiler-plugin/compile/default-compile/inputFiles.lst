@@ -4,6 +4,7 @@
 /Users/michael.rousseau/Documents/EPITA/ing2/JAVA/ProxyBanque_michael_rousseau/src/main/java/com/example/proxibanque/application/ClientController.java
 /Users/michael.rousseau/Documents/EPITA/ing2/JAVA/ProxyBanque_michael_rousseau/src/main/java/com/example/proxibanque/application/ClientCreateRequest.java
 /Users/michael.rousseau/Documents/EPITA/ing2/JAVA/ProxyBanque_michael_rousseau/src/main/java/com/example/proxibanque/application/ClientResponse.java
+/Users/michael.rousseau/Documents/EPITA/ing2/JAVA/ProxyBanque_michael_rousseau/src/main/java/com/example/proxibanque/application/ClientUpdateRequest.java
 /Users/michael.rousseau/Documents/EPITA/ing2/JAVA/ProxyBanque_michael_rousseau/src/main/java/com/example/proxibanque/application/DtoMapper.java
 /Users/michael.rousseau/Documents/EPITA/ing2/JAVA/ProxyBanque_michael_rousseau/src/main/java/com/example/proxibanque/application/GlobalExceptionHandler.java
 /Users/michael.rousseau/Documents/EPITA/ing2/JAVA/ProxyBanque_michael_rousseau/src/main/java/com/example/proxibanque/application/WireTransferRequest.java
