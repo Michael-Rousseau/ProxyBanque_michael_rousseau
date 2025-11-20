@@ -15,4 +15,6 @@ public class ClientResponse {
     private String firstName;
     private String address;
     private String email;
+    private String currentAccountId;
+    private String savingsAccountId;
 }

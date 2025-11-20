@@ -26,7 +26,7 @@ public class ClientDomainService implements ClientManagementUseCase {
         }
 
         advisor.addClient(client);
-
+        client.setAdvisorId(advisorId);
         return clientRepository.save(client);
     }
 
@@ -37,5 +37,37 @@ public class ClientDomainService implements ClientManagementUseCase {
 
         client.deactivateAllCards();
         clientRepository.deleteById(clientId);
+    }
+
+    @Override
+    public void wireTransfer(UUID fromClientId, UUID toClientId, double amount) {
+        if (amount <= 0) {
+            throw new BusinessException("Transfer amount must be positive");
+        }
+
+        Client fromClient = clientRepository.findById(fromClientId)
+                .orElseThrow(() -> new BusinessException("Source client not found"));
+
+        Client toClient = clientRepository.findById(toClientId)
+                .orElseThrow(() -> new BusinessException("Destination client not found"));
+
+        if (fromClient.getCurrentAccount() == null) {
+            throw new BusinessException("Source client has no current account");
+        }
+
+        if (toClient.getCurrentAccount() == null) {
+            throw new BusinessException("Destination client has no current account");
+        }
+
+        // Perform the transfer
+        fromClient.getCurrentAccount().withdraw(amount);
+        toClient.getCurrentAccount().deposit(amount);
+
+        // Check and update card status for the sender
+        fromClient.checkAndUpdateCardStatus();
+
+        // Save both clients
+        clientRepository.save(fromClient);
+        clientRepository.save(toClient);
     }
 }

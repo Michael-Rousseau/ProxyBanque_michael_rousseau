@@ -7,4 +7,5 @@ import java.util.UUID;
 public interface ClientManagementUseCase {
     Client createClient(Client client, UUID advisorId);
     void removeClient(UUID clientId);
+    void wireTransfer(UUID fromClientId, UUID toClientId, double amount);
 }

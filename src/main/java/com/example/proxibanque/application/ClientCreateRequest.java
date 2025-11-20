@@ -17,4 +17,9 @@ public class ClientCreateRequest {
     private String zipCode;
     private String city;
     private String phone;
+    private String email;
+    private boolean createCurrentAccount;
+    private double currentAccountBalance;
+    private boolean createSavingsAccount;
+    private double savingsAccountBalance;
 }
